@@ -3,17 +3,27 @@ from random import randint, random, choice
 from organizm import Organizm
 from czlowiek import Czlowiek
 from roslina import Roslina
-from zwierze import Zwierze
+from zwierzes.antylopa import Antylopa
+from zwierzes.wilk import Wilk
+from zwierzes.zolw import Zolw
+from zwierzes.owca import Owca
+from zwierzes.lis import Lis
+from zwierzes.cyber_owca import CyberOwca
+
+from rosliny.guarana import Guarana
+from rosliny.barscz_sosnowskiego import BarsczSosnowskiego
+from rosliny.trawa import Trawa
+from rosliny.mlecz import Mlecz
+from rosliny.wilcze_jagody import WilczeJagody
 
 
 class World:
-    moves = ['up', 'down', 'left', 'right', 'stop']
-
     def __init__(self, width, height):
         self.organisms = []
         self.width = width
         self.height = height
         self.turn = 0
+        self.human = None
         for _ in range(int(width * height / 15)):
             self.add_random_organism()
 
@@ -23,11 +33,32 @@ class World:
         if organism == "Czlowiek":
             self.human = Czlowiek(x, y, self)
             self.organisms.append(self.human)
-        elif organism == "Roslina":
-            self.organisms.append(Roslina(x, y, self))
+        elif organism == "Wilk":
+            self.organisms.append(Wilk(x, y, self))
+        elif organism == "Owca":
+            self.organisms.append(Owca(x, y, self))
+        elif organism == "Lis":
+            self.organisms.append(Lis(x, y, self))
+        elif organism == "Zolw":
+            self.organisms.append(Zolw(x, y, self))
+        elif organism == "Antylopa":
+            self.organisms.append(Antylopa(x, y, self))
+        elif organism == "CyberOwca":
+            self.organisms.append(CyberOwca(x, y, self))
+        elif organism == "Guarana":
+            self.organisms.append(Guarana(x, y, self))
+        elif organism == "BarsczSosnowskiego":
+            self.organisms.append(BarsczSosnowskiego(x, y, self))
+        elif organism == "Trawa":
+            self.organisms.append(Trawa(x, y, self))
+        elif organism == "Mlecz":
+            self.organisms.append(Mlecz(x, y, self))
+        elif organism == "WilczeJagody":
+            self.organisms.append(WilczeJagody(x, y, self))
 
     def add_random_organism(self):
-        organisms = [Roslina, Zwierze]
+        organisms = [Antylopa, Wilk, Zolw, Owca, Lis, CyberOwca,
+                     Guarana, BarsczSosnowskiego, Trawa, Mlecz, WilczeJagody]
         x = randint(0, self.width - 1)
         y = randint(0, self.height - 1)
         organism = choice(organisms)(x, y, self)
@@ -87,3 +118,14 @@ class World:
                 organism = Organizm(self, 0, 0)
                 organism.load_from_file(file)
                 self.organisms.append(organism)
+
+    def find_neardyest_barszcz(self, x, y):
+        barszcz_pos = None
+        min_distance = 100000
+        for organism in self.organisms:
+            if organism.__class__.__name__ == "BarsczSosnowskiego":
+                distance = abs(organism.x-x) + abs(organism.y-y)
+                if distance < min_distance:
+                    min_distance = distance
+                    barszcz_pos = [organism.x, organism.y]
+        return barszcz_pos
