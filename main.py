@@ -65,10 +65,6 @@ Wilcze jagody - blue'''
     hint_label.pack()
 
 
-def on_button_click():
-    print("Кнопка нажата!")
-
-
 def on_mouse_click(event):
     if (event.x > world.width*20 or event.y > world.height*20):
         return
@@ -84,6 +80,24 @@ def create_random_square(x, y):
     x2 = x + size // 2
     y2 = y + size // 2
     canvas.create_rectangle(x1, y1, x2, y2, fill=color)
+
+
+def file_manager_func(function):
+    def save_text():
+        entered_text = text_entry.get()
+        function(entered_text)
+        text_entry_window.destroy()
+
+    text_entry_window = tk.Toplevel()
+    text_entry_window.title("Enter file name")
+
+    text_entry = tk.Entry(text_entry_window, width=30)
+    text_entry.pack()
+
+    save_button = tk.Button(text_entry_window, text="Confirm", command=save_text)
+    save_button.pack()
+
+    text_entry_window.wait_window()
 
 
 def on_key_press(event):
@@ -102,14 +116,28 @@ def on_key_press(event):
         world.human.set_umiejetnosc()
         os.system('clear')
         print("Umiejetnosc aktywowana")
-
-    if (event.keysym.lower() != "u"):
-        next_turn()
+        return
+    elif (event.keysym.lower() == "s"):
+        save_to_file()
+        return
+    elif (event.keysym.lower() == "l"):
+        load_from_file()
+        return
+    next_turn()
 
 
 def next_turn():
     os.system('clear')
     world.next_turn()
+    draw_world()
+
+
+def save_to_file():
+    file_manager_func(world.save_to_file)
+
+
+def load_from_file():
+    file_manager_func(world.load_from_file)
     draw_world()
 
 
@@ -128,12 +156,12 @@ def add_hood(window):
     button_container2 = tk.Frame(window)
     button_container2.pack(pady=10, fill=tk.BOTH)
 
-    button3 = tk.Button(button_container2, text="Кнопка 3",
-                        command=on_button_click)
+    button3 = tk.Button(button_container2, text="Save to file",
+                        command=save_to_file)
     button3.pack(side=tk.LEFT, padx=10, fill=tk.BOTH, expand=True)
 
-    button4 = tk.Button(button_container2, text="Кнопка 4",
-                        command=on_button_click)
+    button4 = tk.Button(button_container2, text="Load from file",
+                        command=load_from_file)
     button4.pack(side=tk.LEFT, padx=10, fill=tk.BOTH, expand=True)
 
     window.bind()
@@ -172,7 +200,6 @@ window = tk.Tk()
 window.title("Pavel Harelik 196766")
 window.geometry("x".join(str_size))
 
-global canvas
 canvas = tk.Canvas(window, width=size[0], height=size[1]-100)
 canvas.pack()
 

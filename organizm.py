@@ -19,4 +19,4 @@ class Organizm:
         pass
 
     def __str__(self):
-        return self.__class__.__name__ + ' ' + str(self.x) + ' ' + str(self.y) + ' ' + str(self.sila) + ' ' + str(self.inicjatywa) + ' ' + str(self.age)
+        return self.__class__.__name__ + ' ' + str(self.x) + ' ' + str(self.y) + ' ' + str(self.age)

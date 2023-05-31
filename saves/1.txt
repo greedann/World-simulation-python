@@ -1,0 +1,31 @@
+0
+20
+20
+Czlowiek 0 0 0 0
+26
+Trawa 3 7 0
+WilczeJagody 10 15 0
+Wilk 12 4 0
+Lis 12 0 0
+Mlecz 7 13 0
+Guarana 15 0 0
+Lis 3 7 0
+Guarana 19 19 0
+Zolw 15 5 0
+Owca 11 8 0
+Guarana 0 1 0
+Guarana 13 7 0
+Mlecz 2 0 0
+Zolw 16 3 0
+Trawa 10 9 0
+BarsczSosnowskiego 12 12 0
+BarsczSosnowskiego 4 9 0
+Trawa 15 3 0
+Wilk 15 16 0
+WilczeJagody 17 3 0
+Owca 10 10 0
+Mlecz 9 2 0
+Trawa 14 0 0
+Mlecz 17 16 0
+Trawa 15 15 0
+Wilk 13 17 0

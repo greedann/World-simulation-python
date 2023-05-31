@@ -65,7 +65,10 @@ class World:
         self.organisms.append(organism)
 
     def remove_organism(self, organism) -> None:
-        self.organisms.remove(organism)
+        if organism in self.organisms:
+            self.organisms.remove(organism)
+        elif organism == self.human:
+            self.human.color = None
 
     def get_organism(self, x, y):
         for organism in self.organisms:
@@ -97,26 +100,32 @@ class World:
         return None
 
     def save_to_file(self, file_name):
-        with open(file_name, 'w') as file:
+        with open('./saves/'+file_name, 'w') as file:
             file.write(str(self.turn) + '\n')
             file.write(str(self.width) + '\n')
             file.write(str(self.height) + '\n')
-            file.write(str(self.human) + '\n')
+            file.write(str(self.human)+' ' +
+                       str(self.human.umiejetnosc) + '\n')
             file.write(str(len(self.organisms)) + '\n')
             for organism in self.organisms:
                 file.write(str(organism) + '\n')
 
     def load_from_file(self, file_name):
-        with open(file_name, 'r') as file:
+        with open('./saves/'+file_name, 'r') as file:
             self.turn = int(file.readline())
             self.width = int(file.readline())
             self.height = int(file.readline())
-            self.human = Czlowiek(self, 0, 0)
-            self.human.load_from_file(file)
+            self.human = Czlowiek(0, 0, self)
+            parameters = file.readline().split()
+            parameters = [int(x) for x in parameters[1:]]
+            self.human.x, self.human.y, self.human.age, self.human.umiejetnosc = parameters
             self.organisms = []
             for _ in range(int(file.readline())):
-                organism = Organizm(self, 0, 0)
-                organism.load_from_file(file)
+                parameters = file.readline().split()
+                cls = globals()[parameters[0]]
+                parameters = [int(x) for x in parameters[1:]]
+                organism = cls(parameters[0], parameters[1], self)
+                organism.wiek = parameters[2]
                 self.organisms.append(organism)
 
     def find_neardyest_barszcz(self, x, y):
