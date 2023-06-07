@@ -6,9 +6,9 @@ import random
 class Roslina(Organizm):
     def __init__(self, x, y, world):
         super().__init__(x, y, world)
-        self.sila = 0
-        self.inicjatywa = 0
-        self.color = 'green'
+        self.__sila = 0
+        self.__inicjatywa = 0
+        self.__color = 'green'
 
     def akcja(self):
         self.age += 1

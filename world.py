@@ -19,13 +19,41 @@ from rosliny.wilcze_jagody import WilczeJagody
 
 class World:
     def __init__(self, width, height):
-        self.organisms = []
-        self.width = width
-        self.height = height
-        self.turn = 0
-        self.human = None
+        self.__organisms = []
+        self.__width = width
+        self.__height = height
+        self.__turn = 0
+        self.__human = None
         for _ in range(int(width * height / 15)):
             self.add_random_organism()
+
+    @property
+    def width(self):
+        return self.__width
+
+    @property
+    def height(self):
+        return self.__height
+
+    @property
+    def turn(self):
+        return self.__turn
+
+    @turn.setter
+    def turn(self, value):
+        self.__turn = value
+
+    @property
+    def human(self):
+        return self.__human
+
+    @human.setter
+    def human(self, value):
+        self.__human = value
+
+    @property
+    def organisms(self):
+        return self.__organisms
 
     def add_organism(self, organism, x, y):
         if self.is_ocuppied(x, y):
@@ -113,13 +141,13 @@ class World:
     def load_from_file(self, file_name):
         with open('./saves/'+file_name, 'r') as file:
             self.turn = int(file.readline())
-            self.width = int(file.readline())
-            self.height = int(file.readline())
+            self.__width = int(file.readline())
+            self.__height = int(file.readline())
             self.human = Czlowiek(0, 0, self)
             parameters = file.readline().split()
             parameters = [int(x) for x in parameters[1:]]
             self.human.x, self.human.y, self.human.age, self.human.umiejetnosc = parameters
-            self.organisms = []
+            self.__organisms = []
             for _ in range(int(file.readline())):
                 parameters = file.readline().split()
                 cls = globals()[parameters[0]]

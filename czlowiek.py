@@ -6,7 +6,7 @@ class Czlowiek(Organizm):
         super().__init__(x, y, world)
         self.sila = 5
         self.inicjatywa = 4
-        self.umiejetnosc = 0
+        self.__umiejetnosc = 0
         self.color = 'red'
 
     def akcja(self, dx, dy):
@@ -34,3 +34,11 @@ class Czlowiek(Organizm):
     def set_umiejetnosc(self):
         if (self.umiejetnosc == 0):
             self.umiejetnosc = 5
+
+    @property
+    def umiejetnosc(self): 
+        return self.__umiejetnosc
+    
+    @umiejetnosc.setter
+    def umiejetnosc(self, value):
+        self.__umiejetnosc = value
