@@ -1,11 +1,9 @@
-from world import World
-from czlowiek import Czlowiek
-from zwierzes.antylopa import Antylopa
-
+import os
 import tkinter as tk
 from tkinter import messagebox
-import random
-import os
+
+from czlowiek import Czlowiek
+from world import World
 
 
 def add_new_organizm(x, y):
@@ -19,7 +17,7 @@ def add_new_organizm(x, y):
     def select_choice():
         selected_organizm = user_choice.get()
         czoise_window.destroy()
-        messagebox.showinfo("Choise", f"Chosen: {selected_organizm}")
+        messagebox.showinfo("Choise", f"Added {selected_organizm}")
         world.add_organism(selected_organizm, x, y)
         draw_world()
         window.focus_set()
@@ -58,7 +56,7 @@ Trawa - green
 Wilcze jagody - blue'''
 
     hint_window = tk.Toplevel()
-    hint_window.title("Подсказка")
+    hint_window.title("Hint")
 
     hint_label = tk.Label(hint_window, text=hint_text,
                           justify=tk.LEFT, padx=10, pady=10)
@@ -69,17 +67,6 @@ def on_mouse_click(event):
     if (event.x > world.width*20 or event.y > world.height*20):
         return
     add_new_organizm(event.x // 20, event.y // 20)
-
-
-def create_random_square(x, y):
-    colors = ["red", "green", "blue", "yellow", "orange", "purple"]
-    color = random.choice(colors)
-    size = 50
-    x1 = x - size // 2
-    y1 = y - size // 2
-    x2 = x + size // 2
-    y2 = y + size // 2
-    canvas.create_rectangle(x1, y1, x2, y2, fill=color)
 
 
 def file_manager_func(function):
@@ -94,7 +81,8 @@ def file_manager_func(function):
     text_entry = tk.Entry(text_entry_window, width=30)
     text_entry.pack()
 
-    save_button = tk.Button(text_entry_window, text="Confirm", command=save_text)
+    save_button = tk.Button(
+        text_entry_window, text="Confirm", command=save_text)
     save_button.pack()
 
     text_entry_window.wait_window()
@@ -186,7 +174,7 @@ def draw_organism(organism):
 
 
 # size = input("Input width and heighth: ").strip().split()
-size = "20 20".strip().split()
+size = "25 25".strip().split()
 size = [int(x) for x in size]
 world = World(size[0], size[1])
 czlowiek = Czlowiek(0, 0, world)

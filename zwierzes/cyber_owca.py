@@ -9,10 +9,10 @@ class CyberOwca(Zwierze):
         self.color = "black"
 
     def akcja(self):
-        neardyest_barszcz = self.world.find_neardyest_barszcz(self.x, self.y)
-        if neardyest_barszcz is not None:
-            dx = neardyest_barszcz[0] - self.x
-            dy = neardyest_barszcz[1] - self.y
+        nearby_barszcz = self.world.find_neardyest_barszcz(self.x, self.y)
+        if nearby_barszcz is not None:
+            dx = nearby_barszcz[0] - self.x
+            dy = nearby_barszcz[1] - self.y
             dx = dx // abs(dx) if dx != 0 else 0
             dy = dy // abs(dy) if dy != 0 else 0
             new_x = self.x + dx

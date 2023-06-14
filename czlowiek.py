@@ -1,4 +1,5 @@
 from organizm import Organizm
+import random
 
 
 class Czlowiek(Organizm):
@@ -11,7 +12,7 @@ class Czlowiek(Organizm):
 
     def akcja(self, dx, dy):
         self.age += 1
-        if (self.umiejetnosc > 0):
+        if self.umiejetnosc > 2 or (self.umiejetnosc > 0 and random.randint(0, 1) == 0):
             dx *= 2
             dy *= 2
 
@@ -36,9 +37,9 @@ class Czlowiek(Organizm):
             self.umiejetnosc = 5
 
     @property
-    def umiejetnosc(self): 
+    def umiejetnosc(self):
         return self.__umiejetnosc
-    
+
     @umiejetnosc.setter
     def umiejetnosc(self, value):
         self.__umiejetnosc = value
