@@ -12,15 +12,15 @@ class Organizm:
     @property
     def sila(self):
         return self.__sila
-    
+
     @sila.setter
     def sila(self, value):
         self.__sila = value
-    
+
     @property
     def inicjatywa(self):
         return self.__inicjatywa
-    
+
     @inicjatywa.setter
     def inicjatywa(self, value):
         self.__inicjatywa = value
@@ -37,16 +37,16 @@ class Organizm:
     @property
     def y(self):
         return self.__y
-    
+
     @y.setter
     def y(self, value):
         if (value >= 0 and value < self.__world.height):
             self.__y = value
-        
+
     @property
     def age(self):
         return self.__age
-    
+
     @age.setter
     def age(self, value):
         self.__age = value
@@ -54,7 +54,7 @@ class Organizm:
     @property
     def color(self):
         return self.__color
-    
+
     @color.setter
     def color(self, value):
         self.__color = value
@@ -62,7 +62,6 @@ class Organizm:
     @property
     def world(self):
         return self.__world
-
 
     def akcja(self):
         pass

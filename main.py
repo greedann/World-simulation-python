@@ -37,23 +37,23 @@ def add_new_organizm(x, y):
 
 def show_hint_window():
     hint_text = '''Controls:
-SPACE to next turn
-U to use special ability
-Arrows to move
-S to save to file
-L to load from file
+    SPACE to go to the next round
+    U to use special ability
+    Arrows to move
+    S to save to file
+    L to load from file
 
-Types of organisms and colors:
-Antylopa - cyan
-Lis - orange
-Wilk - dark gray
-Owca - white
-Zolw - grey
-Barszcz - magenta
-Guarana - pink
-Mlecz - yellow
-Trawa - green
-Wilcze jagody - blue'''
+    Types of organisms and colors:
+    Antylopa - cyan
+    Lis - orange
+    Wilk - dark gray
+    Owca - white
+    Zolw - grey
+    Barszcz - magenta
+    Guarana - pink
+    Mlecz - yellow
+    Trawa - green
+    Wilcze jagody - blue'''
 
     hint_window = tk.Toplevel()
     hint_window.title("Hint")
