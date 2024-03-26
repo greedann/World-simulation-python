@@ -19,16 +19,16 @@ The application also allows you to save and load the current state of the simula
 
 Hotkeys can be viewed in the application by pressing the button `Show hint` or in the table above
 | Key | Action
-| ----- | -----
+| :-----: | -----
 | <kbd>Space</kbd> | Go to the next round
 | <kbd>U</kbd> | Use special ability
 | <kbd>S</kbd> | Save current state to file
 | <kbd>L</kbd> | Load current state from file
-| `Arrows` | Move around the field
+| <kbd>Arrows</kbd> | Move around the field
 
 ## Installation
 
-To run the application locally you need to bend the repository.
+To run the application locally you need to clone the repository.
 ```bash
 $ git clone https://github.com/greedann/World-simulation-python.git
 $ cd World-simulation-python
